@@ -61,27 +61,60 @@ class ModelRegistry:
                 self.metadata = json.load(f)
 
         # 4. Preprocessor
+        self.preprocessor = None
         if os.path.exists(PREPROCESSOR_PATH):
-            self.preprocessor = joblib.load(PREPROCESSOR_PATH)
+            try:
+                self.preprocessor = joblib.load(PREPROCESSOR_PATH)
+            except Exception:
+                self.preprocessor = None
+        if self.preprocessor is None:
+            from ml.config import MODELS_DIR
+            prep_json = os.path.join(MODELS_DIR, "preprocessor.json")
+            if os.path.exists(prep_json):
+                from ml.pure_engine import PureDataPipeline
+                self.preprocessor = PureDataPipeline(prep_json)
 
         # 5. Primary Model
+        self.model = None
         if os.path.exists(MODEL_PATH):
-            self.model = joblib.load(MODEL_PATH)
+            try:
+                self.model = joblib.load(MODEL_PATH)
+            except Exception:
+                self.model = None
+        if self.model is None:
+            from ml.config import MODELS_DIR
+            xgb_json = os.path.join(MODELS_DIR, "xgb_model.json")
+            if os.path.exists(xgb_json):
+                from ml.pure_engine import PureTreeModel
+                self.model = PureTreeModel(xgb_json)
 
         # 6. All models comparison dictionary
+        self.all_models = {}
         if os.path.exists(ALL_MODELS_PATH):
-            self.all_models = joblib.load(ALL_MODELS_PATH)
-        elif self.model:
-            self.all_models = {"Selected Model": self.model}
+            try:
+                self.all_models = joblib.load(ALL_MODELS_PATH)
+            except Exception:
+                self.all_models = {}
+        if not self.all_models and self.model:
+            self.all_models = {"XGBoost (Champion)": self.model}
 
         # 7. Anomaly Detector
+        self.anomaly_detector = None
         if os.path.exists(ANOMALY_MODEL_PATH):
-            self.anomaly_detector = load_anomaly_detector(ANOMALY_MODEL_PATH)
+            try:
+                self.anomaly_detector = load_anomaly_detector(ANOMALY_MODEL_PATH)
+            except Exception:
+                self.anomaly_detector = None
+        if self.anomaly_detector is None:
+            from ml.config import MODELS_DIR
+            anom_json = os.path.join(MODELS_DIR, "anomaly_stats.json")
+            if os.path.exists(anom_json):
+                from ml.pure_engine import PureAnomalyDetector
+                self.anomaly_detector = PureAnomalyDetector(anom_json)
 
         # 8. SHAP Explainer
-        if self.model and self.preprocessor and hasattr(self.preprocessor, "scaler"):
+        if self.model and self.preprocessor:
             try:
-                # Synthetic background representation from preprocessor mean/std
                 dim = len(self.feature_names) if self.feature_names else 16
                 bg = np.zeros((30, dim))
                 self.explainer = FireExplainer(self.model, bg, self.feature_names)

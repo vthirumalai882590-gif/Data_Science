@@ -1,8 +1,6 @@
-# Production Serverless Function Dependencies (Vercel bundle < 350 MB)
+# Ultra-lightweight dependencies for Vercel Serverless Function (~50 MB total)
 numpy>=1.26.0,<2.0.0
 pandas>=2.0.0
-scikit-learn>=1.4.0
-xgboost>=2.0.0
 joblib>=1.3.0
 
 fastapi>=0.110.0
