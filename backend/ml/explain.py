@@ -6,28 +6,42 @@ to explain individual predictions with directional impacts and plain-language na
 
 import numpy as np
 import pandas as pd
-import shap
 from ml.feature_engineering import FEATURE_DESCRIPTIONS, compute_engineered_features
+
+try:
+    import shap
+    HAS_SHAP = True
+except ImportError:
+    shap = None
+    HAS_SHAP = False
 
 class FireExplainer:
     """
-    Stateful SHAP explainer supporting TreeExplainer (Random Forest, XGBoost, Decision Tree)
-    and LinearExplainer/KernelExplainer fallbacks.
+    High-performance Explainable AI (XAI) engine supporting:
+    1. Native XGBoost C++ TreeSHAP (pred_contribs=True) for zero-dependency sub-millisecond attributions
+    2. SHAP TreeExplainer / KernelExplainer if shap library is present
+    3. Model importance-weighted deviation fallback
     """
     def __init__(self, model, background_data: np.ndarray, feature_names: list[str]):
         self.model = model
         self.feature_names = feature_names
         self.background_data = background_data
+        self.explainer = None
+        self.is_tree = False
         
-        # Initialize SHAP explainer
-        try:
-            self.explainer = shap.TreeExplainer(model)
-            self.is_tree = True
-        except Exception:
-            # Fallback for linear/kernel models
-            sample_bg = background_data[:50] if len(background_data) > 50 else background_data
-            self.explainer = shap.KernelExplainer(model.predict_proba, sample_bg)
-            self.is_tree = False
+        # Check if model has native XGBoost TreeSHAP capability
+        if hasattr(self.model, "get_booster"):
+            self.has_native_xgb = True
+        else:
+            self.has_native_xgb = False
+            if HAS_SHAP and shap is not None:
+                try:
+                    self.explainer = shap.TreeExplainer(model)
+                    self.is_tree = True
+                except Exception:
+                    sample_bg = background_data[:50] if len(background_data) > 50 else background_data
+                    self.explainer = shap.KernelExplainer(model.predict_proba, sample_bg)
+                    self.is_tree = False
 
     def explain_instance(self, scaled_features: np.ndarray, raw_features_dict: dict) -> dict:
         """
@@ -40,24 +54,47 @@ class FireExplainer:
         # Ensure 2D shape (1, n_features)
         X_inst = np.array(scaled_features).reshape(1, -1)
         
-        try:
-            shap_values = self.explainer.shap_values(X_inst)
-            
-            # Handle multi-class / binary list vs array formats
-            if isinstance(shap_values, list):
-                # Class 1 (Fire) attributions
-                vals = shap_values[1][0] if len(shap_values) > 1 else shap_values[0][0]
-            elif isinstance(shap_values, np.ndarray) and shap_values.ndim == 3:
-                vals = shap_values[0, :, 1]
-            elif isinstance(shap_values, np.ndarray) and shap_values.ndim == 2:
-                vals = shap_values[0]
+        vals = None
+        base_val = 0.5
+        
+        # 1. Native XGBoost TreeSHAP (C++ optimized, zero extra dependencies)
+        if self.has_native_xgb:
+            try:
+                import xgboost as xgb
+                dmat = xgb.DMatrix(X_inst, feature_names=self.feature_names)
+                contribs = self.model.get_booster().predict(dmat, pred_contribs=True)
+                vals = contribs[0, :-1]
+                base_val = float(contribs[0, -1])
+            except Exception:
+                vals = None
+
+        # 2. Standard SHAP library if available
+        if vals is None and self.explainer is not None and HAS_SHAP:
+            try:
+                shap_values = self.explainer.shap_values(X_inst)
+                if isinstance(shap_values, list):
+                    vals = shap_values[1][0] if len(shap_values) > 1 else shap_values[0][0]
+                elif isinstance(shap_values, np.ndarray) and shap_values.ndim == 3:
+                    vals = shap_values[0, :, 1]
+                elif isinstance(shap_values, np.ndarray) and shap_values.ndim == 2:
+                    vals = shap_values[0]
+                else:
+                    vals = np.array(shap_values).flatten()
+                base_val = float(
+                    self.explainer.expected_value[1]
+                    if isinstance(self.explainer.expected_value, (list, np.ndarray))
+                    else self.explainer.expected_value
+                )
+            except Exception:
+                vals = None
+
+        # 3. Fallback: feature importances / linear weights
+        if vals is None:
+            if hasattr(self.model, "feature_importances_"):
+                fi = self.model.feature_importances_
+                vals = np.array(X_inst[0]) * fi
             else:
-                vals = np.array(shap_values).flatten()
-                
-            base_val = float(self.explainer.expected_value[1] if isinstance(self.explainer.expected_value, (list, np.ndarray)) else self.explainer.expected_value)
-        except Exception as e:
-            # Fallback: model feature importances proportional attribution
-            vals = np.zeros(len(self.feature_names))
+                vals = np.zeros(len(self.feature_names))
             base_val = 0.5
 
         # Format drivers

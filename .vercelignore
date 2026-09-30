@@ -1,0 +1,11 @@
+.git
+.github
+.pytest_cache
+notebooks/
+tests/
+data/raw/
+data/interim/
+scripts/
+*.log
+Dockerfile
+docker-compose.yml
