@@ -1,0 +1,18 @@
+[
+  "Temperature",
+  "RH",
+  "Ws",
+  "Rain",
+  "FFMC",
+  "DMC",
+  "DC",
+  "ISI",
+  "BUI",
+  "FWI",
+  "Region",
+  "temp_rh_ratio",
+  "dryness_index",
+  "wind_temp_interaction",
+  "rain_deficit",
+  "ffmc_isi_ratio"
+]

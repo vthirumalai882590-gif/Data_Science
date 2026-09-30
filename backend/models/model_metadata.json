@@ -1,0 +1,65 @@
+{
+  "model_name": "XGBoost",
+  "model_type": "XGBClassifier",
+  "training_date": "2026-09-30 15:17:04 UTC",
+  "dataset": "UCI Algerian Forest Fires (Bejaia & Sidi Bel-abbes regions)",
+  "features": [
+    "Temperature",
+    "RH",
+    "Ws",
+    "Rain",
+    "FFMC",
+    "DMC",
+    "DC",
+    "ISI",
+    "BUI",
+    "FWI",
+    "Region",
+    "temp_rh_ratio",
+    "dryness_index",
+    "wind_temp_interaction",
+    "rain_deficit",
+    "ffmc_isi_ratio"
+  ],
+  "core_features": [
+    "Temperature",
+    "RH",
+    "Ws",
+    "Rain",
+    "FFMC",
+    "DMC",
+    "DC",
+    "ISI",
+    "BUI",
+    "FWI"
+  ],
+  "target": "Fire Occurrence (Classes: fire=1, not fire=0)",
+  "metrics": {
+    "model_name": "XGBoost",
+    "accuracy": 0.9592,
+    "precision": 0.9333,
+    "recall": 1.0,
+    "f1": 0.9655,
+    "roc_auc": 0.9983,
+    "pr_auc": 0.9988,
+    "confusion_matrix": [
+      [
+        19,
+        2
+      ],
+      [
+        0,
+        28
+      ]
+    ],
+    "true_negatives": 19,
+    "false_positives": 2,
+    "false_negatives": 0,
+    "true_positives": 28,
+    "false_negative_rate": 0.0,
+    "false_positive_rate": 0.0952,
+    "safety_notes": "In wildfire monitoring, False Negatives (predicting no fire when fire occurs) carry severe catastrophic risk. Models with high Recall and minimal FN are prioritized."
+  },
+  "random_state": 42,
+  "evaluation_strategy": "Stratified 80/20 Train-Test Partition"
+}
