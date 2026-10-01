@@ -31,12 +31,18 @@ const API_BASE = (import.meta.env.VITE_API_URL || "/api").replace(/\/$/, "");
 
 async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const url = `${API_BASE}${endpoint}`;
-  const res = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    ...options,
-  });
+
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      signal: AbortSignal.timeout(4000), // 4-second timeout so Vercel never hangs
+      headers: { "Content-Type": "application/json" },
+      ...options,
+    });
+  } catch {
+    // Network failure (ECONNREFUSED, timeout, offline) → use embedded engine
+    throw new Error("Network unreachable — embedded AI engine active.");
+  }
 
   if (!res.ok) {
     let errorMsg = `Server error (${res.status})`;
@@ -50,9 +56,9 @@ async function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   }
 
   // Guard against SPA returning index.html for unknown /api routes
-  const contentType = res.headers.get("content-type");
-  if (contentType && contentType.includes("text/html")) {
-    throw new Error("HTML response received instead of JSON (backend endpoint unavailable on Vercel).");
+  const contentType = res.headers.get("content-type") ?? "";
+  if (contentType.includes("text/html")) {
+    throw new Error("HTML response — backend not available on this deployment.");
   }
 
   return await res.json();
