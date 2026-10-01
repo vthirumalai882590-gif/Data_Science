@@ -1,0 +1,11 @@
+{
+  "name": "fireguard-x",
+  "private": true,
+  "version": "1.0.0",
+  "description": "FIREGUARD X: Explainable Forest Fire Risk Intelligence, Prediction & Simulation Platform",
+  "scripts": {
+    "build": "npm --prefix frontend install && npm --prefix frontend run build",
+    "dev": "npm --prefix frontend run dev",
+    "preview": "npm --prefix frontend run preview"
+  }
+}
