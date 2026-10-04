@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2026-10-02T12:46:29.035106+00:00",
+    "timestamp": "2026-10-04T09:51:53.898305+00:00",
     "random_state": 42,
     "test_size": 0.2,
     "features": [
@@ -114,13 +114,13 @@
         "test_mae": 7.8905
       },
       "classification": {
-        "accuracy": 0.818,
-        "precision": 0.7826,
+        "accuracy": 0.8191,
+        "precision": 0.7841,
         "recall": 0.8842,
-        "f1_score": 0.8303,
+        "f1_score": 0.8311,
         "roc_auc": 0.9033,
-        "train_accuracy": 0.8153,
-        "test_accuracy": 0.818,
+        "train_accuracy": 0.8158,
+        "test_accuracy": 0.8191,
         "train_roc_auc": 0.9073,
         "test_roc_auc": 0.9033
       },
@@ -143,33 +143,33 @@
     "XGBoost": {
       "type": "Gradient Boosting",
       "regression": {
-        "r2": 0.7207,
-        "rmse": 10.5577,
-        "mae": 8.2342,
-        "train_r2": 0.767,
-        "test_r2": 0.7207,
-        "train_rmse": 11.8199,
-        "test_rmse": 10.5577,
-        "train_mae": 8.4098,
-        "test_mae": 8.2342
+        "r2": 0.714,
+        "rmse": 10.684,
+        "mae": 8.3349,
+        "train_r2": 0.7663,
+        "test_r2": 0.714,
+        "train_rmse": 11.8386,
+        "test_rmse": 10.684,
+        "train_mae": 8.3556,
+        "test_mae": 8.3349
       },
       "classification": {
         "accuracy": 0.8065,
-        "precision": 0.7712,
-        "recall": 0.8755,
-        "f1_score": 0.8201,
-        "roc_auc": 0.8901,
-        "train_accuracy": 0.8014,
+        "precision": 0.7681,
+        "recall": 0.882,
+        "f1_score": 0.8212,
+        "roc_auc": 0.8904,
+        "train_accuracy": 0.7989,
         "test_accuracy": 0.8065,
-        "train_roc_auc": 0.887,
-        "test_roc_auc": 0.8901
+        "train_roc_auc": 0.8871,
+        "test_roc_auc": 0.8904
       },
       "burned_area_regression": {
-        "r2": -0.017,
-        "rmse": 1.4951,
-        "mae": 1.2047,
-        "train_r2": 0.1495,
-        "test_r2": -0.017
+        "r2": -0.0261,
+        "rmse": 1.5017,
+        "mae": 1.2095,
+        "train_r2": 0.1568,
+        "test_r2": -0.0261
       },
       "parameters": {
         "n_estimators": 40,
@@ -188,32 +188,32 @@
     "temperature": {
       "ridge_coef": 2.427,
       "rf_importance": 0.073,
-      "xgb_importance": 0.035
+      "xgb_importance": 0.042
     },
     "relative_humidity": {
       "ridge_coef": -2.318,
       "rf_importance": 0.087,
-      "xgb_importance": 0.024
+      "xgb_importance": 0.015
     },
     "wind_speed": {
       "ridge_coef": 2.417,
       "rf_importance": 0.029,
-      "xgb_importance": 0.018
+      "xgb_importance": 0.022
     },
     "rain": {
       "ridge_coef": 2.941,
       "rf_importance": 0.148,
-      "xgb_importance": 0.169
+      "xgb_importance": 0.199
     },
     "vapor_pressure_deficit": {
       "ridge_coef": 2.821,
       "rf_importance": 0.118,
-      "xgb_importance": 0.126
+      "xgb_importance": 0.042
     },
     "heat_aridity_index": {
       "ridge_coef": 2.24,
       "rf_importance": 0.179,
-      "xgb_importance": 0.169
+      "xgb_importance": 0.272
     },
     "wind_spread_factor": {
       "ridge_coef": 5.36,
@@ -223,7 +223,7 @@
     "rain_suppression": {
       "ridge_coef": 11.691,
       "rf_importance": 0.174,
-      "xgb_importance": 0.217
+      "xgb_importance": 0.165
     }
   },
   "quebec_classification": {
@@ -240,20 +240,20 @@
         "roc_auc": 0.8898
       },
       "Random Forest": {
-        "accuracy": 0.818,
-        "precision": 0.7826,
+        "accuracy": 0.8191,
+        "precision": 0.7841,
         "recall": 0.8842,
-        "f1": 0.8303,
-        "f1_score": 0.8303,
+        "f1": 0.8311,
+        "f1_score": 0.8311,
         "roc_auc": 0.9033
       },
       "XGBoost": {
         "accuracy": 0.8065,
-        "precision": 0.7712,
-        "recall": 0.8755,
-        "f1": 0.8201,
-        "f1_score": 0.8201,
-        "roc_auc": 0.8901
+        "precision": 0.7681,
+        "recall": 0.882,
+        "f1": 0.8212,
+        "f1_score": 0.8212,
+        "roc_auc": 0.8904
       }
     },
     "train_metrics": {
@@ -266,20 +266,20 @@
         "roc_auc": 0.8788
       },
       "Random Forest": {
-        "accuracy": 0.8153,
-        "precision": 0.7807,
-        "recall": 0.8806,
-        "f1": 0.8276,
-        "f1_score": 0.8276,
+        "accuracy": 0.8158,
+        "precision": 0.7811,
+        "recall": 0.8812,
+        "f1": 0.8281,
+        "f1_score": 0.8281,
         "roc_auc": 0.9073
       },
       "XGBoost": {
-        "accuracy": 0.8014,
-        "precision": 0.7693,
-        "recall": 0.8649,
-        "f1": 0.8143,
-        "f1_score": 0.8143,
-        "roc_auc": 0.887
+        "accuracy": 0.7989,
+        "precision": 0.7634,
+        "recall": 0.8706,
+        "f1": 0.8135,
+        "f1_score": 0.8135,
+        "roc_auc": 0.8871
       }
     },
     "best_model": "Random Forest",
@@ -287,37 +287,37 @@
       "temperature": {
         "logistic_l2_coef": 2.586,
         "rf_importance": 0.129,
-        "xgb_importance": 0.095
+        "xgb_importance": 0.088
       },
       "relative_humidity": {
         "logistic_l2_coef": -2.772,
         "rf_importance": 0.197,
-        "xgb_importance": 0.071
+        "xgb_importance": 0.066
       },
       "wind_speed": {
         "logistic_l2_coef": -0.872,
         "rf_importance": 0.067,
-        "xgb_importance": 0.055
+        "xgb_importance": 0.054
       },
       "rain": {
         "logistic_l2_coef": 0.038,
         "rf_importance": 0.015,
-        "xgb_importance": 0.047
+        "xgb_importance": 0.045
       },
       "vapor_pressure_deficit": {
         "logistic_l2_coef": -3.8,
         "rf_importance": 0.21,
-        "xgb_importance": 0.043
+        "xgb_importance": 0.07
       },
       "heat_aridity_index": {
         "logistic_l2_coef": 0.987,
         "rf_importance": 0.302,
-        "xgb_importance": 0.67
+        "xgb_importance": 0.663
       },
       "wind_spread_factor": {
         "logistic_l2_coef": 0.669,
         "rf_importance": 0.066,
-        "xgb_importance": 0.019
+        "xgb_importance": 0.014
       },
       "rain_suppression": {
         "logistic_l2_coef": -0.338,
@@ -344,10 +344,10 @@
         "mae": 7.8905
       },
       "XGBoost": {
-        "r2": 0.7207,
-        "r2_score": 0.7207,
-        "rmse": 10.5577,
-        "mae": 8.2342
+        "r2": 0.714,
+        "r2_score": 0.714,
+        "rmse": 10.684,
+        "mae": 8.3349
       }
     },
     "train_metrics": {
@@ -364,43 +364,43 @@
         "mae": 7.5774
       },
       "XGBoost": {
-        "r2": 0.767,
-        "r2_score": 0.767,
-        "rmse": 11.8199,
-        "mae": 8.4098
+        "r2": 0.7663,
+        "r2_score": 0.7663,
+        "rmse": 11.8386,
+        "mae": 8.3556
       }
     },
-    "best_model": "XGBoost",
+    "best_model": "Random Forest",
     "feature_impacts": {
       "temperature": {
         "ridge_coef": 2.427,
         "rf_importance": 0.073,
-        "xgb_importance": 0.035
+        "xgb_importance": 0.042
       },
       "relative_humidity": {
         "ridge_coef": -2.318,
         "rf_importance": 0.087,
-        "xgb_importance": 0.024
+        "xgb_importance": 0.015
       },
       "wind_speed": {
         "ridge_coef": 2.417,
         "rf_importance": 0.029,
-        "xgb_importance": 0.018
+        "xgb_importance": 0.022
       },
       "rain": {
         "ridge_coef": 2.941,
         "rf_importance": 0.148,
-        "xgb_importance": 0.169
+        "xgb_importance": 0.199
       },
       "vapor_pressure_deficit": {
         "ridge_coef": 2.821,
         "rf_importance": 0.118,
-        "xgb_importance": 0.126
+        "xgb_importance": 0.042
       },
       "heat_aridity_index": {
         "ridge_coef": 2.24,
         "rf_importance": 0.179,
-        "xgb_importance": 0.169
+        "xgb_importance": 0.272
       },
       "wind_spread_factor": {
         "ridge_coef": 5.36,
@@ -410,7 +410,7 @@
       "rain_suppression": {
         "ridge_coef": 11.691,
         "rf_importance": 0.174,
-        "xgb_importance": 0.217
+        "xgb_importance": 0.165
       }
     }
   },
@@ -432,10 +432,10 @@
         "mae": 1.2092
       },
       "XGBoost": {
-        "r2": -0.017,
-        "r2_score": -0.017,
-        "rmse": 1.4951,
-        "mae": 1.2047
+        "r2": -0.0261,
+        "r2_score": -0.0261,
+        "rmse": 1.5017,
+        "mae": 1.2095
       }
     },
     "train_metrics": {
@@ -452,10 +452,10 @@
         "mae": 1.0574
       },
       "XGBoost": {
-        "r2": 0.1495,
-        "r2_score": 0.1495,
-        "rmse": 1.2677,
-        "mae": 1.0496
+        "r2": 0.1568,
+        "r2_score": 0.1568,
+        "rmse": 1.2623,
+        "mae": 1.045
       }
     },
     "best_model": "Ridge (L2 Regularized)"

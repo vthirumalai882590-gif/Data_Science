@@ -47,34 +47,62 @@ st.set_page_config(
 
 CUSTOM_CSS = """
 <style>
-/* Production Minimalist Dark SaaS Theme */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Color Palette Extracted from Design Reference */
 :root {
-    --bg-canvas: #090d16;
-    --bg-surface: #111827;
-    --bg-surface-elevated: #162032;
-    --bg-surface-subtle: #1f2937;
-    --border-subtle: #1f2937;
-    --border-medium: #374151;
-    --text-primary: #f9fafb;
-    --text-secondary: #9ca3af;
-    --text-muted: #6b7280;
-    --brand-blue: #2563eb;
-    --status-green: #16a34a;
-    --status-amber: #d97706;
-    --status-orange: #ea580c;
-    --status-red: #dc2626;
+    --bg-canvas: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f1f5f9;
+    --border-subtle: #e2e8f0;
+    --border-medium: #cbd5e1;
+    --brand-primary: #00594C;
+    --brand-primary-hover: #00453b;
+    --brand-primary-light: #ecfdf5;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --color-green: #047857;
+    --color-green-bg: #ecfdf5;
+    --color-green-border: #a7f3d0;
+    --color-amber: #b45309;
+    --color-amber-bg: #fffbeb;
+    --color-amber-border: #fde68a;
+    --color-orange: #c2410c;
+    --color-orange-bg: #fff7ed;
+    --color-orange-border: #fed7aa;
+    --color-red: #b91c1c;
+    --color-red-bg: #fef2f2;
+    --color-red-border: #fecaca;
+    --color-blue: #1d4ed8;
+    --color-blue-bg: #eff6ff;
+    --color-blue-border: #bfdbfe;
 }
 
-/* Global Font & Surface Reset */
+/* Global Font & Canvas Reset */
 html, body, [class*="css"] {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     color: var(--text-primary);
 }
 
+.stApp {
+    background-color: var(--bg-canvas) !important;
+}
+
 .main .block-container {
-    padding-top: 1.5rem;
-    padding-bottom: 3.5rem;
-    max-width: 1440px;
+    padding-top: 1.25rem !important;
+    padding-bottom: 3.5rem !important;
+    max-width: 1440px !important;
+}
+
+/* Sidebar in Clean White */
+[data-testid="stSidebar"] {
+    background-color: #ffffff !important;
+    border-right: 1px solid var(--border-subtle) !important;
+}
+
+[data-testid="stSidebar"] * {
+    color: var(--text-primary);
 }
 
 /* Top Application Header Bar */
@@ -87,16 +115,16 @@ html, body, [class*="css"] {
     margin-bottom: 1.25rem;
 }
 .app-title-main {
-    font-size: 1.45rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
     color: var(--text-primary);
     margin: 0;
 }
 .app-subtitle-main {
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    margin: 3px 0 0 0;
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    margin: 4px 0 0 0;
 }
 
 /* Telemetry Status Badges */
@@ -104,41 +132,41 @@ html, body, [class*="css"] {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #052e16;
-    border: 1px solid #166534;
-    color: #4ade80;
-    padding: 4px 10px;
-    border-radius: 6px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #047857;
+    padding: 5px 12px;
+    border-radius: 9999px;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 .telemetry-pill-offline {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: #451a03;
-    border: 1px solid #92400e;
-    color: #fcd34d;
-    padding: 4px 10px;
-    border-radius: 6px;
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    color: #b45309;
+    padding: 5px 12px;
+    border-radius: 9999px;
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
-/* Enterprise KPI Metric Card */
+/* Metric Cards */
 .metric-card-pro {
-    background: var(--bg-surface);
+    background: #ffffff;
     border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    padding: 1.1rem 1.25rem;
-    transition: border-color 0.15s ease;
+    border-radius: 12px;
+    padding: 1.15rem 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .metric-card-pro:hover {
-    border-color: var(--border-medium);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 .metric-card-label {
     font-size: 0.72rem;
@@ -153,10 +181,10 @@ html, body, [class*="css"] {
     font-weight: 800;
     color: var(--text-primary);
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
 }
 .metric-card-footer {
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     color: var(--text-secondary);
     margin-top: 0.45rem;
     display: flex;
@@ -166,15 +194,15 @@ html, body, [class*="css"] {
 
 /* Reserve Profile Panel */
 .reserve-card-pro {
-    background: var(--bg-surface);
+    background: #ffffff;
     border: 1px solid var(--border-subtle);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 1.2rem;
-    height: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 .reserve-title {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 1.15rem;
+    font-weight: 800;
     color: var(--text-primary);
     margin: 0;
 }
@@ -187,8 +215,8 @@ html, body, [class*="css"] {
     display: flex;
     justify-content: space-between;
     font-size: 0.82rem;
-    padding: 0.3rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid #f1f5f9;
 }
 .reserve-meta-label {
     color: var(--text-muted);
@@ -199,66 +227,115 @@ html, body, [class*="css"] {
     font-weight: 600;
 }
 
-/* Standard Semantic Hazard Badges (Solid & Crisp) */
+/* Hazard Badges */
 .danger-badge {
-    display: inline-block;
-    padding: 0.25rem 0.65rem;
-    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 6px;
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
-.badge-low { background: #166534; color: #f0fdf4; }
-.badge-moderate { background: #92400e; color: #fffbeb; }
-.badge-high { background: #9a3412; color: #fff7ed; }
-.badge-extreme { background: #991b1b; color: #fef2f2; }
+.badge-low { background: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; }
+.badge-moderate { background: #fffbeb; border: 1px solid #fde68a; color: #b45309; }
+.badge-high { background: #fff7ed; border: 1px solid #fed7aa; color: #c2410c; }
+.badge-extreme { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; }
 
 /* Operational Incident Alert Banner */
 .incident-alert-banner {
-    background: #182234;
-    border: 1px solid #2b3d5b;
-    border-left: 4px solid var(--status-red);
-    border-radius: 6px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 1.2rem;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-left: 4px solid #c2410c;
+    border-radius: 10px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 1.25rem;
 }
 .incident-alert-title {
-    font-size: 0.92rem;
-    font-weight: 700;
-    color: #f87171;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #c2410c;
     margin: 0 0 4px 0;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
 }
 .incident-alert-body {
-    font-size: 0.84rem;
-    color: #e2e8f0;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    color: #475569;
+    line-height: 1.55;
     margin: 0;
 }
 
 /* SOP Protocol Box */
 .sop-box {
-    background: var(--bg-surface);
+    background: #ffffff;
     border: 1px solid var(--border-subtle);
-    border-radius: 8px;
-    padding: 1.2rem;
+    border-radius: 12px;
+    padding: 1.25rem;
     margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 .sop-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: 0.6rem;
-    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 0.65rem;
+    margin-bottom: 0.85rem;
 }
 .sop-title {
     font-size: 0.95rem;
-    font-weight: 700;
+    font-weight: 800;
     color: var(--text-primary);
     margin: 0;
+}
+
+/* Streamlit Tabs Styling */
+.stTabs [data-baseweb="tab-list"] {
+    background: #f1f5f9 !important;
+    border: 1px solid var(--border-subtle) !important;
+    border-radius: 10px !important;
+    padding: 4px !important;
+    gap: 4px !important;
+    margin-bottom: 1.2rem !important;
+}
+.stTabs [data-baseweb="tab"] {
+    border-radius: 7px !important;
+    padding: 7px 16px !important;
+    color: var(--text-secondary) !important;
+    font-weight: 600 !important;
+    font-size: 0.84rem !important;
+    border: none !important;
+    background: transparent !important;
+}
+.stTabs [aria-selected="true"] {
+    background: var(--brand-primary) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 4px rgba(0, 89, 76, 0.2) !important;
+}
+.stTabs [data-baseweb="tab-highlight"] {
+    display: none !important;
+}
+
+/* Buttons in Brand Emerald Green */
+.stButton > button {
+    background: var(--brand-primary) !important;
+    border: 1px solid var(--brand-primary-hover) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    padding: 0.45rem 1rem !important;
+    box-shadow: 0 1px 3px rgba(0, 89, 76, 0.15) !important;
+    transition: all 0.15s ease !important;
+}
+.stButton > button:hover {
+    background: var(--brand-primary-hover) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 3px 6px rgba(0, 89, 76, 0.25) !important;
 }
 </style>
 """
@@ -414,28 +491,28 @@ def get_risk_tier(score: float) -> Tuple[str, str, str, str]:
     if score <= 30.0:
         return (
             "LOW RISK",
-            "#10b981",
+            "#047857",
             "badge-low",
             "Nominal moisture in ground fuel beds. Routine perimeter monitoring; no active patrol restrictions.",
         )
     elif score <= 60.0:
         return (
             "MODERATE RISK",
-            "#f59e0b",
+            "#b45309",
             "badge-moderate",
             "Rising diurnal thermal stress and dried leaf litter. Heighten watchtower surveillance during afternoon hours.",
         )
     elif score <= 80.0:
         return (
             "HIGH RISK",
-            "#f97316",
+            "#c2410c",
             "badge-high",
             "Severe aridity and elevated winds. Mobilize quick-reaction strike teams; suspend eco-tourism trails in vulnerable sectors.",
         )
     else:
         return (
             "EXTREME DANGER",
-            "#ef4444",
+            "#b91c1c",
             "badge-extreme",
             "Critical wildfire danger. Rapid flame front velocity expected. Dispatch aerial reconnaissance and pre-position water tankers.",
         )
@@ -445,7 +522,7 @@ def get_risk_tier(score: float) -> Tuple[str, str, str, str]:
 # Visualization Components (Clean, Professional, Non-Glowing)
 # ==============================================================================
 def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
-    """Create an authoritative dark geospatial overview of Indian forest reserves."""
+    """Create an authoritative geospatial overview of Indian forest reserves."""
     fig = go.Figure()
 
     other_names = [n for n in INDIAN_FORESTS.keys() if n != selected_forest_name]
@@ -460,7 +537,7 @@ def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
         if "high" in vuln.lower() or "extreme" in vuln.lower():
             c = "#dc2626"
         elif "low" in vuln.lower():
-            c = "#16a34a"
+            c = "#047857"
         else:
             c = "#d97706"
         colors.append(c)
@@ -488,11 +565,11 @@ def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
             mode="markers+text",
             text=texts,
             textposition="bottom center",
-            textfont=dict(color="#9ca3af", size=10, family="sans-serif"),
+            textfont=dict(color="#475569", size=10, family="sans-serif"),
             marker=dict(
                 size=sizes,
                 color=colors,
-                line=dict(color="#1f2937", width=1.5),
+                line=dict(color="#ffffff", width=1.5),
                 opacity=0.9,
             ),
             hoverinfo="text",
@@ -501,7 +578,7 @@ def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
         )
     )
 
-    # Active Selected Reserve Highlight Pin (Solid Double Ring, No Glow)
+    # Active Selected Reserve Highlight Pin (Deep Emerald Accent from Reference)
     sel_f = INDIAN_FORESTS[selected_forest_name]
     sel_vuln = sel_f.get("vulnerability", "Moderate")
     sel_ht = (
@@ -521,8 +598,8 @@ def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
             mode="markers",
             marker=dict(
                 size=24,
-                color="rgba(37, 99, 235, 0.25)",
-                line=dict(color="#2563eb", width=2),
+                color="rgba(0, 89, 76, 0.2)",
+                line=dict(color="#00594C", width=2),
             ),
             hoverinfo="text",
             hovertext=[sel_ht],
@@ -538,10 +615,10 @@ def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
             mode="markers+text",
             text=[selected_forest_name],
             textposition="top center",
-            textfont=dict(color="#ffffff", size=11, family="sans-serif"),
+            textfont=dict(color="#0f172a", size=11, family="sans-serif"),
             marker=dict(
                 size=14,
-                color="#2563eb",
+                color="#00594C",
                 symbol="circle",
                 line=dict(color="#ffffff", width=2),
             ),
@@ -556,18 +633,18 @@ def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
         lataxis_range=[7, 36],
         lonaxis_range=[68, 97],
         showland=True,
-        landcolor="#151e2e",
+        landcolor="#f8fafc",
         showocean=True,
-        oceancolor="#090d16",
+        oceancolor="#e0f2fe",
         showcountries=True,
-        countrycolor="#374151",
+        countrycolor="#cbd5e1",
         showsubunits=True,
-        subunitcolor="#1f2937",
+        subunitcolor="#e2e8f0",
         bgcolor="rgba(0,0,0,0)",
     )
 
     fig.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         margin=dict(l=0, r=0, t=10, b=0),
@@ -578,7 +655,7 @@ def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
             y=1.02,
             xanchor="right",
             x=1.0,
-            font=dict(size=11, color="#9ca3af"),
+            font=dict(size=11, color="#475569"),
         ),
     )
 
@@ -586,7 +663,7 @@ def create_indian_forest_map(selected_forest_name: str) -> go.Figure:
 
 
 def create_risk_gauge(risk_score: float, title_text: str = "Fire Danger Index") -> go.Figure:
-    """Create a standard circular radial meter with crisp, non-glowing threshold segments."""
+    """Create a standard circular radial meter with crisp segments."""
     tier_label, tier_color, _, _ = get_risk_tier(risk_score)
 
     fig = go.Figure(
@@ -595,27 +672,27 @@ def create_risk_gauge(risk_score: float, title_text: str = "Fire Danger Index") 
             value=round(risk_score, 1),
             domain={"x": [0, 1], "y": [0, 1]},
             title={
-                "text": f"<b>{title_text}</b><br><span style='font-size:13px; font-weight:600; color:{tier_color};'>{tier_label}</span>",
-                "font": {"size": 16, "color": "#f9fafb"},
+                "text": f"<b>{title_text}</b><br><span style='font-size:13px; font-weight:700; color:{tier_color};'>{tier_label}</span>",
+                "font": {"size": 15, "color": "#0f172a"},
             },
             number={
                 "suffix": " / 100",
-                "font": {"size": 32, "color": "#f9fafb", "family": "-apple-system, sans-serif"},
+                "font": {"size": 32, "color": "#0f172a", "family": "Plus Jakarta Sans, sans-serif"},
             },
             gauge={
-                "axis": {"range": [0, 100], "tickwidth": 1, "tickcolor": "#6b7280", "nticks": 6},
+                "axis": {"range": [0, 100], "tickwidth": 1, "tickcolor": "#94a3b8", "nticks": 6},
                 "bar": {"color": tier_color, "thickness": 0.28},
-                "bgcolor": "rgba(31, 41, 55, 0.4)",
+                "bgcolor": "#f1f5f9",
                 "borderwidth": 1,
-                "bordercolor": "#374151",
+                "bordercolor": "#e2e8f0",
                 "steps": [
-                    {"range": [0, 30], "color": "rgba(22, 163, 74, 0.25)"},
-                    {"range": [30, 60], "color": "rgba(217, 119, 6, 0.25)"},
-                    {"range": [60, 80], "color": "rgba(234, 88, 12, 0.25)"},
-                    {"range": [80, 100], "color": "rgba(220, 38, 38, 0.25)"},
+                    {"range": [0, 30], "color": "rgba(4, 120, 87, 0.15)"},
+                    {"range": [30, 60], "color": "rgba(180, 83, 9, 0.15)"},
+                    {"range": [60, 80], "color": "rgba(194, 65, 12, 0.15)"},
+                    {"range": [80, 100], "color": "rgba(185, 28, 28, 0.15)"},
                 ],
                 "threshold": {
-                    "line": {"color": "#ffffff", "width": 2.5},
+                    "line": {"color": "#0f172a", "width": 2.5},
                     "thickness": 0.8,
                     "value": risk_score,
                 },
@@ -652,9 +729,9 @@ def create_forecast_timeline_chart(df: pd.DataFrame) -> go.Figure:
             x=df["time"],
             y=df["risk_score"],
             name="Fire Hazard Score",
-            line=dict(color="#ea580c", width=3),
+            line=dict(color="#c2410c", width=3),
             fill="tozeroy",
-            fillcolor="rgba(234, 88, 12, 0.08)",
+            fillcolor="rgba(194, 65, 12, 0.08)",
             hovertemplate="%{x|%b %d, %H:%M}<br>Hazard Score: <b>%{y:.1f}</b><extra></extra>",
         ),
         row=1,
@@ -665,24 +742,24 @@ def create_forecast_timeline_chart(df: pd.DataFrame) -> go.Figure:
     fig.add_hrect(
         y0=80,
         y1=100,
-        fillcolor="rgba(220, 38, 38, 0.12)",
+        fillcolor="rgba(185, 28, 28, 0.08)",
         line_width=0,
         annotation_text="Extreme Danger (81–100)",
         annotation_position="top right",
         annotation_font_size=10,
-        annotation_font_color="#dc2626",
+        annotation_font_color="#b91c1c",
         row=1,
         col=1,
     )
     fig.add_hrect(
         y0=60,
         y1=80,
-        fillcolor="rgba(234, 88, 12, 0.08)",
+        fillcolor="rgba(194, 65, 12, 0.06)",
         line_width=0,
         annotation_text="High Risk (61–80)",
         annotation_position="top right",
         annotation_font_size=10,
-        annotation_font_color="#ea580c",
+        annotation_font_color="#c2410c",
         row=1,
         col=1,
     )
@@ -704,7 +781,7 @@ def create_forecast_timeline_chart(df: pd.DataFrame) -> go.Figure:
             x=df["time"],
             y=df["relative_humidity"],
             name="Humidity (%)",
-            line=dict(color="#2563eb", width=2, dash="dash"),
+            line=dict(color="#0284c7", width=2, dash="dash"),
             hovertemplate="Humidity: %{y:.1f}%<extra></extra>",
         ),
         row=2,
@@ -715,7 +792,7 @@ def create_forecast_timeline_chart(df: pd.DataFrame) -> go.Figure:
             x=df["time"],
             y=df["wind_speed"],
             name="Wind Speed (km/h)",
-            line=dict(color="#16a34a", width=1.8),
+            line=dict(color="#00594C", width=2),
             hovertemplate="Wind: %{y:.1f} km/h<extra></extra>",
         ),
         row=2,
@@ -734,28 +811,28 @@ def create_forecast_timeline_chart(df: pd.DataFrame) -> go.Figure:
             x=current_time_val,
             line_width=1.5,
             line_dash="dot",
-            line_color="#9ca3af",
+            line_color="#64748b",
             annotation_text="OBSERVED NOW" if r == 1 else "",
             annotation_position="top left",
             annotation_font_size=10,
-            annotation_font_color="#cbd5e1",
+            annotation_font_color="#0f172a",
             row=r,
             col=1,
         )
 
     fig.update_layout(
-        template="plotly_dark",
+        template="plotly_white",
         paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(17, 24, 39, 0.5)",
+        plot_bgcolor="#ffffff",
         height=520,
         margin=dict(l=35, r=35, t=60, b=30),
         legend=dict(orientation="h", yanchor="bottom", y=1.04, xanchor="right", x=1.0),
         hovermode="x unified",
     )
 
-    fig.update_yaxes(title_text="Hazard (0–100)", range=[0, 105], row=1, col=1, gridcolor="#1f2937")
-    fig.update_yaxes(title_text="Observations", row=2, col=1, gridcolor="#1f2937")
-    fig.update_xaxes(gridcolor="#1f2937")
+    fig.update_yaxes(title_text="Hazard (0–100)", range=[0, 105], row=1, col=1, gridcolor="#f1f5f9")
+    fig.update_yaxes(title_text="Observations", row=2, col=1, gridcolor="#f1f5f9")
+    fig.update_xaxes(gridcolor="#f1f5f9")
 
     return fig
 
@@ -803,9 +880,9 @@ with st.sidebar:
     st.markdown(
         """
         <div style='margin-bottom:14px;'>
-            <div style='font-size:0.75rem; font-weight:700; color:#6b7280; letter-spacing:0.08em; text-transform:uppercase;'>Republic of India</div>
-            <div style='font-size:1.15rem; font-weight:800; color:#f9fafb;'>National Forest Fire Portal</div>
-            <div style='font-size:0.75rem; color:#9ca3af;'>Ministry of Environment, Forest & Climate Change</div>
+            <div style='font-size:0.75rem; font-weight:700; color:#00594C; letter-spacing:0.08em; text-transform:uppercase;'>Republic of India</div>
+            <div style='font-size:1.15rem; font-weight:800; color:#0f172a;'>National Forest Fire Portal</div>
+            <div style='font-size:0.75rem; color:#64748b;'>Ministry of Environment, Forest & Climate Change</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -874,9 +951,9 @@ with st.sidebar:
     if is_live_telemetry:
         st.markdown(
             """
-            <div style='background:#052e16; border:1px solid #166534; border-radius:6px; padding:8px 10px; text-align:center;'>
-                <div style='font-size:0.68rem; color:#86efac; font-weight:700;'>CONNECTION HEALTH</div>
-                <div style='font-size:0.8rem; color:#4ade80; font-weight:800;'>ONLINE • LIVE NWP FEED</div>
+            <div style='background:#ecfdf5; border:1px solid #a7f3d0; border-radius:8px; padding:10px; text-align:center;'>
+                <div style='font-size:0.68rem; color:#047857; font-weight:700; letter-spacing:0.04em;'>CONNECTION HEALTH</div>
+                <div style='font-size:0.8rem; color:#00594C; font-weight:800;'>ONLINE • LIVE NWP FEED</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -884,16 +961,16 @@ with st.sidebar:
     else:
         st.markdown(
             """
-            <div style='background:#451a03; border:1px solid #92400e; border-radius:6px; padding:8px 10px; text-align:center;'>
-                <div style='font-size:0.68rem; color:#fde68a; font-weight:700;'>CONNECTION HEALTH</div>
-                <div style='font-size:0.8rem; color:#fcd34d; font-weight:800;'>OFFLINE • CLIMATOLOGY MODE</div>
+            <div style='background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:10px; text-align:center;'>
+                <div style='font-size:0.68rem; color:#b45309; font-weight:700; letter-spacing:0.04em;'>CONNECTION HEALTH</div>
+                <div style='font-size:0.8rem; color:#92400e; font-weight:800;'>OFFLINE • CLIMATOLOGY MODE</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
     st.markdown(
-        "<div style='font-size:0.72rem; color:#6b7280; margin-top:12px;'>Automated weather station link refreshed hourly. Synchronized with India Meteorological Department grid benchmarks.</div>",
+        "<div style='font-size:0.72rem; color:#64748b; margin-top:12px;'>Automated weather station link refreshed hourly. Synchronized with India Meteorological Department grid benchmarks.</div>",
         unsafe_allow_html=True,
     )
 
@@ -918,7 +995,7 @@ st.markdown(
         </div>
         <div style="display:flex; align-items:center; gap:12px;">
             {status_pill_html}
-            <span style="font-size:0.78rem; color:#6b7280;">Updated: {st.session_state['last_refresh_time']}</span>
+            <span style="font-size:0.78rem; color:#64748b;">Updated: {st.session_state['last_refresh_time']}</span>
         </div>
     </div>
     """,
@@ -944,7 +1021,7 @@ with tab1:
     with col_t_header:
         st.subheader(f"Current Meteorological Observations: {selected_forest_name}")
     with col_t_btn:
-        if st.button("🔄 Refresh Weather Data", use_container_width=True):
+        if st.button("🔄 Refresh Weather Data", width="stretch"):
             current_weather, hourly_weather = fetch_weather_for_forest(selected_forest_name, force_refresh=True)
             st.rerun()
 
@@ -965,7 +1042,7 @@ with tab1:
             f"""
             <div class="metric-card-pro">
                 <div class="metric-card-label">Surface Temperature</div>
-                <div class="metric-card-value">{cur_temp:.1f} <span style="font-size:1.1rem; font-weight:500; color:#9ca3af;">°C</span></div>
+                <div class="metric-card-value">{cur_temp:.1f} <span style="font-size:1.1rem; font-weight:500; color:#64748b;">°C</span></div>
                 <div class="metric-card-footer">{"Thermal stress elevated" if cur_temp > 32 else "Within seasonal baseline"}</div>
             </div>
             """,
@@ -976,7 +1053,7 @@ with tab1:
             f"""
             <div class="metric-card-pro">
                 <div class="metric-card-label">Relative Humidity</div>
-                <div class="metric-card-value">{cur_rh:.0f} <span style="font-size:1.1rem; font-weight:500; color:#9ca3af;">%</span></div>
+                <div class="metric-card-value">{cur_rh:.0f} <span style="font-size:1.1rem; font-weight:500; color:#64748b;">%</span></div>
                 <div class="metric-card-footer">{"Dry undergrowth risk" if cur_rh < 40 else "Adequate canopy moisture"}</div>
             </div>
             """,
@@ -987,7 +1064,7 @@ with tab1:
             f"""
             <div class="metric-card-pro">
                 <div class="metric-card-label">Sustained Wind (10m)</div>
-                <div class="metric-card-value">{cur_wind:.1f} <span style="font-size:1.1rem; font-weight:500; color:#9ca3af;">km/h</span></div>
+                <div class="metric-card-value">{cur_wind:.1f} <span style="font-size:1.1rem; font-weight:500; color:#64748b;">km/h</span></div>
                 <div class="metric-card-footer">{"Rapid fireline propagation potential" if cur_wind > 20 else "Gentle air velocity"}</div>
             </div>
             """,
@@ -998,7 +1075,7 @@ with tab1:
             f"""
             <div class="metric-card-pro">
                 <div class="metric-card-label">24h Precipitation</div>
-                <div class="metric-card-value">{cur_rain:.1f} <span style="font-size:1.1rem; font-weight:500; color:#9ca3af;">mm</span></div>
+                <div class="metric-card-value">{cur_rain:.1f} <span style="font-size:1.1rem; font-weight:500; color:#64748b;">mm</span></div>
                 <div class="metric-card-footer">{"Active rain suppression" if cur_rain > 0 else "Zero recent precipitation"}</div>
             </div>
             """,
@@ -1012,29 +1089,24 @@ with tab1:
 
     with map_pane:
         st.markdown(
-            "<div style='font-size:0.92rem; font-weight:700; color:#f9fafb; margin-bottom:6px;'>Protected Biospheres & National Reserve Coordinates</div>",
+            "<div style='font-size:0.92rem; font-weight:700; color:#0f172a; margin-bottom:6px;'>Protected Biospheres & National Reserve Coordinates</div>",
             unsafe_allow_html=True,
         )
         map_fig = create_indian_forest_map(selected_forest_name)
-        st.plotly_chart(map_fig, use_container_width=True)
+        st.plotly_chart(map_fig, width="stretch")
 
     with status_pane:
-        st.markdown(
-            "<div style='background:#111827; border:1px solid #1f2937; border-radius:8px; padding:16px;'>",
-            unsafe_allow_html=True,
-        )
         gauge_fig = create_risk_gauge(risk_score, title_text="Current Wildfire Hazard Index")
-        st.plotly_chart(gauge_fig, use_container_width=True)
+        st.plotly_chart(gauge_fig, width="stretch")
 
         st.markdown(
             f"""
-            <div style='margin-top:-10px; background:#162032; border-radius:6px; padding:12px; border:1px solid #1f2937;'>
+            <div style='margin-top:-10px; background:#ffffff; border-radius:12px; padding:14px; border:1px solid #e2e8f0; box-shadow:0 1px 3px rgba(0,0,0,0.03);'>
                 <div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;'>
-                    <span style='font-size:0.75rem; font-weight:700; color:#9ca3af; text-transform:uppercase;'>OPERATIONAL PROTOCOL</span>
+                    <span style='font-size:0.75rem; font-weight:700; color:#64748b; text-transform:uppercase;'>OPERATIONAL PROTOCOL</span>
                     <span class='danger-badge {tier_badge}'>{tier_label}</span>
                 </div>
-                <p style='font-size:0.83rem; color:#e2e8f0; line-height:1.45; margin:0;'>{tier_advice}</p>
-            </div>
+                <p style='font-size:0.83rem; color:#334155; line-height:1.45; margin:0;'>{tier_advice}</p>
             </div>
             """,
             unsafe_allow_html=True,
@@ -1094,7 +1166,7 @@ with tab2:
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                 <div>
                     <div class="incident-alert-title">Critical Hazard Window Anticipated</div>
-                    <h3 style="margin:2px 0 0 0; font-size:1.15rem; font-weight:700; color:#f9fafb;">
+                    <h3 style="margin:2px 0 0 0; font-size:1.15rem; font-weight:700; color:#0f172a;">
                         Apex Risk Predicted at {peak_time_str}
                     </h3>
                 </div>
@@ -1125,37 +1197,43 @@ with tab2:
 
     with subtab_risk:
         timeline_fig = create_forecast_timeline_chart(hourly_df)
-        st.plotly_chart(timeline_fig, use_container_width=True)
+        st.plotly_chart(timeline_fig, width="stretch")
 
     with subtab_temp_rh:
         fig_th = go.Figure()
         fig_th.add_trace(go.Scatter(x=hourly_df["time"], y=hourly_df["temperature"], name="Temperature (°C)", line=dict(color="#dc2626", width=2.5)))
-        fig_th.add_trace(go.Scatter(x=hourly_df["time"], y=hourly_df["relative_humidity"], name="Humidity (%)", line=dict(color="#2563eb", width=2.5, dash="dash")))
+        fig_th.add_trace(go.Scatter(x=hourly_df["time"], y=hourly_df["relative_humidity"], name="Humidity (%)", line=dict(color="#0284c7", width=2.5, dash="dash")))
         fig_th.update_layout(
             title="<b>Inverse Diurnal Relationship: Solar Radiative Heating vs Canopy Humidity</b>",
-            template="plotly_dark",
+            template="plotly_white",
             paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(17, 24, 39, 0.5)",
+            plot_bgcolor="#ffffff",
             height=400,
             hovermode="x unified",
+            font=dict(color="#0f172a"),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1.0),
         )
-        st.plotly_chart(fig_th, use_container_width=True)
+        fig_th.update_yaxes(gridcolor="#f1f5f9")
+        fig_th.update_xaxes(gridcolor="#f1f5f9")
+        st.plotly_chart(fig_th, width="stretch")
 
     with subtab_wind_rain:
         fig_wr = make_subplots(specs=[[{"secondary_y": True}]])
-        fig_wr.add_trace(go.Scatter(x=hourly_df["time"], y=hourly_df["wind_speed"], name="Wind Speed (km/h)", line=dict(color="#16a34a", width=2.5)), secondary_y=False)
-        fig_wr.add_trace(go.Bar(x=hourly_df["time"], y=hourly_df["rain"], name="Precipitation (mm)", marker_color="rgba(37, 99, 235, 0.6)"), secondary_y=True)
+        fig_wr.add_trace(go.Scatter(x=hourly_df["time"], y=hourly_df["wind_speed"], name="Wind Speed (km/h)", line=dict(color="#00594C", width=2.5)), secondary_y=False)
+        fig_wr.add_trace(go.Bar(x=hourly_df["time"], y=hourly_df["rain"], name="Precipitation (mm)", marker_color="rgba(2, 132, 199, 0.6)"), secondary_y=True)
         fig_wr.update_layout(
             title="<b>Wind Aeration Vectors & Rainfall Suppression</b>",
-            template="plotly_dark",
+            template="plotly_white",
             paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(17, 24, 39, 0.5)",
+            plot_bgcolor="#ffffff",
             height=400,
             hovermode="x unified",
+            font=dict(color="#0f172a"),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1.0),
         )
-        st.plotly_chart(fig_wr, use_container_width=True)
+        fig_wr.update_yaxes(gridcolor="#f1f5f9")
+        fig_wr.update_xaxes(gridcolor="#f1f5f9")
+        st.plotly_chart(fig_wr, width="stretch")
 
     with st.expander("🔍 View Complete Hourly Matrix", expanded=False):
         display_df = hourly_df[["time", "temperature", "relative_humidity", "wind_speed", "rain", "risk_score"]].copy()
@@ -1170,7 +1248,7 @@ with tab2:
             }
         )
         display_df["Fire Danger Index"] = display_df["Fire Danger Index"].round(1)
-        st.dataframe(display_df, use_container_width=True, height=260)
+        st.dataframe(display_df, width="stretch", height=260)
 
 
 # ==============================================================================
@@ -1194,22 +1272,22 @@ with tab3:
     if "sim_rain" not in st.session_state:
         st.session_state["sim_rain"] = 0.0
 
-    st.markdown("<span style='font-size:0.75rem; font-weight:700; color:#9ca3af; text-transform:uppercase;'>QUICK SCENARIO PRESETS:</span>", unsafe_allow_html=True)
+    st.markdown("<span style='font-size:0.75rem; font-weight:700; color:#64748b; text-transform:uppercase;'>QUICK SCENARIO PRESETS:</span>", unsafe_allow_html=True)
     p1, p2, p3, p4 = st.columns(4)
     with p1:
-        if st.button("Severe Heatwave & Aridity", use_container_width=True):
+        if st.button("Severe Heatwave & Aridity", width="stretch"):
             st.session_state["sim_temp"], st.session_state["sim_rh"], st.session_state["sim_wind"], st.session_state["sim_rain"] = 43.5, 15.0, 35.0, 0.0
             st.rerun()
     with p2:
-        if st.button("Monsoon Downpour Influx", use_container_width=True):
+        if st.button("Monsoon Downpour Influx", width="stretch"):
             st.session_state["sim_temp"], st.session_state["sim_rh"], st.session_state["sim_wind"], st.session_state["sim_rain"] = 23.0, 92.0, 12.0, 28.0
             st.rerun()
     with p3:
-        if st.button("Dry Pre-Monsoon Gusts", use_container_width=True):
+        if st.button("Dry Pre-Monsoon Gusts", width="stretch"):
             st.session_state["sim_temp"], st.session_state["sim_rh"], st.session_state["sim_wind"], st.session_state["sim_rain"] = 38.0, 28.0, 42.0, 0.2
             st.rerun()
     with p4:
-        if st.button("Seasonal Spring Baseline", use_container_width=True):
+        if st.button("Seasonal Spring Baseline", width="stretch"):
             st.session_state["sim_temp"], st.session_state["sim_rh"], st.session_state["sim_wind"], st.session_state["sim_rain"] = 28.0, 55.0, 14.0, 0.0
             st.rerun()
 
@@ -1219,10 +1297,7 @@ with tab3:
 
     with sim_ctrl:
         st.markdown(
-            """
-            <div style='background:#111827; border:1px solid #1f2937; border-radius:8px; padding:18px;'>
-                <div style='font-size:0.85rem; font-weight:700; color:#f9fafb; margin-bottom:12px;'>Hypothetical Atmospheric Inputs</div>
-            """,
+            "<div style='font-size:0.88rem; font-weight:700; color:#0f172a; margin-bottom:10px;'>Hypothetical Atmospheric Inputs</div>",
             unsafe_allow_html=True,
         )
 
@@ -1230,8 +1305,6 @@ with tab3:
         sim_rh = st.slider("Relative Humidity (%)", 5.0, 100.0, float(st.session_state["sim_rh"]), 1.0)
         sim_wind = st.slider("Wind Velocity (km/h)", 0.0, 60.0, float(st.session_state["sim_wind"]), 1.0)
         sim_rain = st.slider("Precipitation Influx (mm)", 0.0, 50.0, float(st.session_state["sim_rain"]), 0.5)
-
-        st.markdown("</div>", unsafe_allow_html=True)
 
     with sim_display:
         sim_preds = predict_fire_risk_scores(sim_temp, sim_rh, sim_wind, sim_rain, models)
@@ -1243,40 +1316,33 @@ with tab3:
         live_score = live_preds["Consensus"]
         delta_score = sim_score - live_score
 
-        st.markdown(
-            """
-            <div style='background:#111827; border:1px solid #1f2937; border-radius:8px; padding:16px;'>
-            """,
-            unsafe_allow_html=True,
-        )
         sim_gauge_fig = create_risk_gauge(sim_score, title_text="Simulated Hazard Response")
-        st.plotly_chart(sim_gauge_fig, use_container_width=True)
+        st.plotly_chart(sim_gauge_fig, width="stretch")
 
         delta_sign = "+" if delta_score >= 0 else ""
-        delta_color = "#dc2626" if delta_score > 0 else "#16a34a"
+        delta_color = "#dc2626" if delta_score > 0 else "#047857"
 
         st.markdown(
             f"""
-            <div style='background:#162032; border:1px solid #1f2937; border-radius:6px; padding:14px; margin-top:-10px;'>
+            <div style='background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin-top:-10px; box-shadow:0 1px 3px rgba(0,0,0,0.03);'>
                 <div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;'>
-                    <span style='font-size:0.75rem; font-weight:700; color:#9ca3af;'>SCENARIO CLASSIFICATION</span>
+                    <span style='font-size:0.75rem; font-weight:700; color:#64748b;'>SCENARIO CLASSIFICATION</span>
                     <span class='danger-badge {s_badge}'>{s_tier}</span>
                 </div>
-                <div style='display:flex; justify-content:space-between; align-items:center; border-top:1px solid #1f2937; padding-top:8px;'>
+                <div style='display:flex; justify-content:space-between; align-items:center; border-top:1px solid #e2e8f0; padding-top:8px;'>
                     <div>
-                        <span style='font-size:0.75rem; color:#9ca3af; display:block;'>Real-World Live Baseline</span>
-                        <strong style='font-size:1.1rem; color:#f9fafb;'>{live_score:.1f}</strong>
+                        <span style='font-size:0.75rem; color:#64748b; display:block;'>Real-World Live Baseline</span>
+                        <strong style='font-size:1.1rem; color:#0f172a;'>{live_score:.1f}</strong>
                     </div>
                     <div>
-                        <span style='font-size:0.75rem; color:#9ca3af; display:block;'>Simulated Outcome</span>
+                        <span style='font-size:0.75rem; color:#64748b; display:block;'>Simulated Outcome</span>
                         <strong style='font-size:1.1rem; color:{s_color};'>{sim_score:.1f}</strong>
                     </div>
                     <div>
-                        <span style='font-size:0.75rem; color:#9ca3af; display:block;'>Net Hazard Delta</span>
+                        <span style='font-size:0.75rem; color:#64748b; display:block;'>Net Hazard Delta</span>
                         <strong style='font-size:1.1rem; color:{delta_color};'>{delta_sign}{delta_score:.1f} pts</strong>
                     </div>
                 </div>
-            </div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -1305,7 +1371,7 @@ with tab4:
                     <span class="sop-title">Operational Escalation Thresholds</span>
                     <span class="danger-badge badge-high">Field Readiness</span>
                 </div>
-                <div style="font-size:0.83rem; line-height:1.6; color:#cbd5e1;">
+                <div style="font-size:0.83rem; line-height:1.6; color:#334155;">
                     <p><strong>Tier 1 — Low Danger (0–30):</strong> Standard forest guard patrols. Maintenance of dry firebreak lines along tourist roads and sanctuary borders.</p>
                     <p><strong>Tier 2 — Moderate Danger (31–60):</strong> Mandatory lookout watchtower staffing from 11:00 AM to 5:00 PM. Controlled slash and leaf-litter burning permits temporarily paused.</p>
                     <p><strong>Tier 3 — High Risk (61–80):</strong> Rapid response vehicles deployed with portable water pumps. Non-essential jungle safaris restricted to paved perimeter corridors.</p>
@@ -1324,7 +1390,7 @@ with tab4:
                     <span class="sop-title">Emergency Escalation Contacts ({selected_forest_name})</span>
                     <span class="danger-badge badge-low">Verified Directory</span>
                 </div>
-                <div style="font-size:0.83rem; line-height:1.6; color:#cbd5e1;">
+                <div style="font-size:0.83rem; line-height:1.6; color:#334155;">
                     <p><strong>State Forest Headquarters:</strong> {forest_info.get('state', 'India')} Forest Department Control Room</p>
                     <p><strong>Division Forest Officer (DFO):</strong> Wildland Fire Incident Command Centre</p>
                     <p><strong>Central Wildland Toll-Free Hotline:</strong> 1926 (Forest Helpline - 24x7 Emergency)</p>
@@ -1341,17 +1407,17 @@ with tab4:
         <div class="sop-box">
             <div class="sop-header">
                 <span class="sop-title">Fireline Clearing & Understory Hazard Mitigation Checklist</span>
-                <span style="font-size:0.75rem; color:#9ca3af;">Ministry Directive Form FD-42</span>
+                <span style="font-size:0.75rem; color:#64748b;">Ministry Directive Form FD-42</span>
             </div>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:12px; font-size:0.82rem; color:#cbd5e1;">
-                <div style="background:#162032; padding:10px 12px; border-radius:6px;">
-                    <strong>1. Counter-Fire Buffering:</strong> Clear vegetative combustible matter along 5-meter buffer belts bordering human settlements and agrarian boundaries.
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:12px; font-size:0.82rem; color:#334155;">
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px;">
+                    <strong style="color:#0f172a;">1. Counter-Fire Buffering:</strong> Clear vegetative combustible matter along 5-meter buffer belts bordering human settlements and agrarian boundaries.
                 </div>
-                <div style="background:#162032; padding:10px 12px; border-radius:6px;">
-                    <strong>2. Water Point Verification:</strong> Ensure artificial waterholes and natural reservoir supply lines maintain at least 70% capacity for aerial helicopter bucket drops.
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px;">
+                    <strong style="color:#0f172a;">2. Water Point Verification:</strong> Ensure artificial waterholes and natural reservoir supply lines maintain at least 70% capacity for aerial helicopter bucket drops.
                 </div>
-                <div style="background:#162032; padding:10px 12px; border-radius:6px;">
-                    <strong>3. Wireless Repeater Health:</strong> Confirm VHF/UHF repeater stations along ridge crests remain powered with uninterrupted solar battery backup.
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px 12px; border-radius:8px;">
+                    <strong style="color:#0f172a;">3. Wireless Repeater Health:</strong> Confirm VHF/UHF repeater stations along ridge crests remain powered with uninterrupted solar battery backup.
                 </div>
             </div>
         </div>
