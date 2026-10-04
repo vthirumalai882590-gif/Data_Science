@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Data
+# Keep directory structures intact, but ignore heavy raw dumps if downloaded locally
+data/raw/*.zip
+data/raw/*.tar.gz
+*.DS_Store
+
+# IDE / System
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Models & Artifacts
+# Uncomment below if model files exceed GitHub 100MB limit
+# models/*.joblib
+
+# Streamlit
+.streamlit/

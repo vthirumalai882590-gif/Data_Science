@@ -1,0 +1,463 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-02T12:46:29.035106+00:00",
+    "random_state": 42,
+    "test_size": 0.2,
+    "features": [
+      "temperature",
+      "relative_humidity",
+      "wind_speed",
+      "rain"
+    ],
+    "base_features": [
+      "temperature",
+      "relative_humidity",
+      "wind_speed",
+      "rain"
+    ],
+    "engineered_features": [
+      "vapor_pressure_deficit",
+      "heat_aridity_index",
+      "wind_spread_factor",
+      "rain_suppression"
+    ],
+    "all_features": [
+      "temperature",
+      "relative_humidity",
+      "wind_speed",
+      "rain",
+      "vapor_pressure_deficit",
+      "heat_aridity_index",
+      "wind_spread_factor",
+      "rain_suppression"
+    ],
+    "quebec_samples": 9171,
+    "algerian_samples": 244,
+    "montesinho_samples": 517,
+    "quebec_samples_total": 9171,
+    "quebec_samples_train": 7336,
+    "quebec_samples_test": 1835,
+    "algerian_samples_total": 244,
+    "algerian_samples_train": 195,
+    "algerian_samples_test": 49,
+    "montesinho_samples_total": 517,
+    "montesinho_samples_train": 413,
+    "montesinho_samples_test": 104,
+    "datasets": {
+      "quebec": {
+        "task": "Classification: Ignition Risk",
+        "samples": 9171,
+        "target": "fire_risk"
+      },
+      "algerian": {
+        "task": "Regression: FWI Severity Score",
+        "samples": 244,
+        "target": "fwi"
+      },
+      "montesinho": {
+        "task": "Regression: Burned Area",
+        "samples": 517,
+        "target": "log_area"
+      }
+    }
+  },
+  "models": {
+    "Ridge (L2 Regularized)": {
+      "type": "Linear Regularized",
+      "regression": {
+        "r2": 0.6561,
+        "rmse": 11.7162,
+        "mae": 8.6987,
+        "train_r2": 0.6486,
+        "test_r2": 0.6561,
+        "train_rmse": 14.5143,
+        "test_rmse": 11.7162,
+        "train_mae": 10.3932,
+        "test_mae": 8.6987
+      },
+      "classification": {
+        "accuracy": 0.8038,
+        "precision": 0.7686,
+        "recall": 0.8734,
+        "f1_score": 0.8176,
+        "roc_auc": 0.8898,
+        "train_accuracy": 0.792,
+        "test_accuracy": 0.8038,
+        "train_roc_auc": 0.8788,
+        "test_roc_auc": 0.8898
+      },
+      "burned_area_regression": {
+        "r2": 0.0068,
+        "rmse": 1.4775,
+        "mae": 1.1935,
+        "train_r2": 0.0268,
+        "test_r2": 0.0068
+      },
+      "parameters": {
+        "alpha": 10.0,
+        "penalty": "l2",
+        "solver": "auto"
+      },
+      "strengths": "Smooth L2 weight shrinkage handles severe collinearity between temperature and humidity. Fast, deterministic, interpretable."
+    },
+    "Random Forest": {
+      "type": "Bagging Ensemble",
+      "regression": {
+        "r2": 0.7156,
+        "rmse": 10.6546,
+        "mae": 7.8905,
+        "train_r2": 0.7954,
+        "test_r2": 0.7156,
+        "train_rmse": 11.0763,
+        "test_rmse": 10.6546,
+        "train_mae": 7.5774,
+        "test_mae": 7.8905
+      },
+      "classification": {
+        "accuracy": 0.818,
+        "precision": 0.7826,
+        "recall": 0.8842,
+        "f1_score": 0.8303,
+        "roc_auc": 0.9033,
+        "train_accuracy": 0.8153,
+        "test_accuracy": 0.818,
+        "train_roc_auc": 0.9073,
+        "test_roc_auc": 0.9033
+      },
+      "burned_area_regression": {
+        "r2": -0.0052,
+        "rmse": 1.4864,
+        "mae": 1.2092,
+        "train_r2": 0.1365,
+        "test_r2": -0.0052
+      },
+      "parameters": {
+        "n_estimators": 50,
+        "max_depth": 4,
+        "min_samples_leaf": 4,
+        "max_features": "sqrt",
+        "random_state": 42
+      },
+      "strengths": "Pruned decision trees prevent memorization while capturing essential non-linear meteorological thresholds."
+    },
+    "XGBoost": {
+      "type": "Gradient Boosting",
+      "regression": {
+        "r2": 0.7207,
+        "rmse": 10.5577,
+        "mae": 8.2342,
+        "train_r2": 0.767,
+        "test_r2": 0.7207,
+        "train_rmse": 11.8199,
+        "test_rmse": 10.5577,
+        "train_mae": 8.4098,
+        "test_mae": 8.2342
+      },
+      "classification": {
+        "accuracy": 0.8065,
+        "precision": 0.7712,
+        "recall": 0.8755,
+        "f1_score": 0.8201,
+        "roc_auc": 0.8901,
+        "train_accuracy": 0.8014,
+        "test_accuracy": 0.8065,
+        "train_roc_auc": 0.887,
+        "test_roc_auc": 0.8901
+      },
+      "burned_area_regression": {
+        "r2": -0.017,
+        "rmse": 1.4951,
+        "mae": 1.2047,
+        "train_r2": 0.1495,
+        "test_r2": -0.017
+      },
+      "parameters": {
+        "n_estimators": 40,
+        "max_depth": 3,
+        "learning_rate": 0.05,
+        "reg_lambda": 5.0,
+        "reg_alpha": 2.0,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "random_state": 42
+      },
+      "strengths": "L1 (reg_alpha) and L2 (reg_lambda) regularized gradient boosting provides strong generalization on tabular weather features."
+    }
+  },
+  "feature_importance": {
+    "temperature": {
+      "ridge_coef": 2.427,
+      "rf_importance": 0.073,
+      "xgb_importance": 0.035
+    },
+    "relative_humidity": {
+      "ridge_coef": -2.318,
+      "rf_importance": 0.087,
+      "xgb_importance": 0.024
+    },
+    "wind_speed": {
+      "ridge_coef": 2.417,
+      "rf_importance": 0.029,
+      "xgb_importance": 0.018
+    },
+    "rain": {
+      "ridge_coef": 2.941,
+      "rf_importance": 0.148,
+      "xgb_importance": 0.169
+    },
+    "vapor_pressure_deficit": {
+      "ridge_coef": 2.821,
+      "rf_importance": 0.118,
+      "xgb_importance": 0.126
+    },
+    "heat_aridity_index": {
+      "ridge_coef": 2.24,
+      "rf_importance": 0.179,
+      "xgb_importance": 0.169
+    },
+    "wind_spread_factor": {
+      "ridge_coef": 5.36,
+      "rf_importance": 0.191,
+      "xgb_importance": 0.242
+    },
+    "rain_suppression": {
+      "ridge_coef": 11.691,
+      "rf_importance": 0.174,
+      "xgb_importance": 0.217
+    }
+  },
+  "quebec_classification": {
+    "dataset": "Quebec Wildfire Prediction Dataset (2018\u20132024)",
+    "samples": 9171,
+    "target": "fire_risk (Binary 0/1)",
+    "metrics": {
+      "Ridge (L2 Regularized)": {
+        "accuracy": 0.8038,
+        "precision": 0.7686,
+        "recall": 0.8734,
+        "f1": 0.8176,
+        "f1_score": 0.8176,
+        "roc_auc": 0.8898
+      },
+      "Random Forest": {
+        "accuracy": 0.818,
+        "precision": 0.7826,
+        "recall": 0.8842,
+        "f1": 0.8303,
+        "f1_score": 0.8303,
+        "roc_auc": 0.9033
+      },
+      "XGBoost": {
+        "accuracy": 0.8065,
+        "precision": 0.7712,
+        "recall": 0.8755,
+        "f1": 0.8201,
+        "f1_score": 0.8201,
+        "roc_auc": 0.8901
+      }
+    },
+    "train_metrics": {
+      "Ridge (L2 Regularized)": {
+        "accuracy": 0.792,
+        "precision": 0.7585,
+        "recall": 0.8611,
+        "f1": 0.8065,
+        "f1_score": 0.8065,
+        "roc_auc": 0.8788
+      },
+      "Random Forest": {
+        "accuracy": 0.8153,
+        "precision": 0.7807,
+        "recall": 0.8806,
+        "f1": 0.8276,
+        "f1_score": 0.8276,
+        "roc_auc": 0.9073
+      },
+      "XGBoost": {
+        "accuracy": 0.8014,
+        "precision": 0.7693,
+        "recall": 0.8649,
+        "f1": 0.8143,
+        "f1_score": 0.8143,
+        "roc_auc": 0.887
+      }
+    },
+    "best_model": "Random Forest",
+    "feature_impacts": {
+      "temperature": {
+        "logistic_l2_coef": 2.586,
+        "rf_importance": 0.129,
+        "xgb_importance": 0.095
+      },
+      "relative_humidity": {
+        "logistic_l2_coef": -2.772,
+        "rf_importance": 0.197,
+        "xgb_importance": 0.071
+      },
+      "wind_speed": {
+        "logistic_l2_coef": -0.872,
+        "rf_importance": 0.067,
+        "xgb_importance": 0.055
+      },
+      "rain": {
+        "logistic_l2_coef": 0.038,
+        "rf_importance": 0.015,
+        "xgb_importance": 0.047
+      },
+      "vapor_pressure_deficit": {
+        "logistic_l2_coef": -3.8,
+        "rf_importance": 0.21,
+        "xgb_importance": 0.043
+      },
+      "heat_aridity_index": {
+        "logistic_l2_coef": 0.987,
+        "rf_importance": 0.302,
+        "xgb_importance": 0.67
+      },
+      "wind_spread_factor": {
+        "logistic_l2_coef": 0.669,
+        "rf_importance": 0.066,
+        "xgb_importance": 0.019
+      },
+      "rain_suppression": {
+        "logistic_l2_coef": -0.338,
+        "rf_importance": 0.014,
+        "xgb_importance": 0.0
+      }
+    }
+  },
+  "algerian_regression": {
+    "dataset": "Algerian Forest Fires Dataset (9 Regions)",
+    "samples": 244,
+    "target": "Fire Weather Risk Index (0-100 Score)",
+    "metrics": {
+      "Ridge (L2 Regularized)": {
+        "r2": 0.6561,
+        "r2_score": 0.6561,
+        "rmse": 11.7162,
+        "mae": 8.6987
+      },
+      "Random Forest": {
+        "r2": 0.7156,
+        "r2_score": 0.7156,
+        "rmse": 10.6546,
+        "mae": 7.8905
+      },
+      "XGBoost": {
+        "r2": 0.7207,
+        "r2_score": 0.7207,
+        "rmse": 10.5577,
+        "mae": 8.2342
+      }
+    },
+    "train_metrics": {
+      "Ridge (L2 Regularized)": {
+        "r2": 0.6486,
+        "r2_score": 0.6486,
+        "rmse": 14.5143,
+        "mae": 10.3932
+      },
+      "Random Forest": {
+        "r2": 0.7954,
+        "r2_score": 0.7954,
+        "rmse": 11.0763,
+        "mae": 7.5774
+      },
+      "XGBoost": {
+        "r2": 0.767,
+        "r2_score": 0.767,
+        "rmse": 11.8199,
+        "mae": 8.4098
+      }
+    },
+    "best_model": "XGBoost",
+    "feature_impacts": {
+      "temperature": {
+        "ridge_coef": 2.427,
+        "rf_importance": 0.073,
+        "xgb_importance": 0.035
+      },
+      "relative_humidity": {
+        "ridge_coef": -2.318,
+        "rf_importance": 0.087,
+        "xgb_importance": 0.024
+      },
+      "wind_speed": {
+        "ridge_coef": 2.417,
+        "rf_importance": 0.029,
+        "xgb_importance": 0.018
+      },
+      "rain": {
+        "ridge_coef": 2.941,
+        "rf_importance": 0.148,
+        "xgb_importance": 0.169
+      },
+      "vapor_pressure_deficit": {
+        "ridge_coef": 2.821,
+        "rf_importance": 0.118,
+        "xgb_importance": 0.126
+      },
+      "heat_aridity_index": {
+        "ridge_coef": 2.24,
+        "rf_importance": 0.179,
+        "xgb_importance": 0.169
+      },
+      "wind_spread_factor": {
+        "ridge_coef": 5.36,
+        "rf_importance": 0.191,
+        "xgb_importance": 0.242
+      },
+      "rain_suppression": {
+        "ridge_coef": 11.691,
+        "rf_importance": 0.174,
+        "xgb_importance": 0.217
+      }
+    }
+  },
+  "montesinho_regression": {
+    "dataset": "Montesinho Natural Park Forest Fires Dataset (Portugal)",
+    "samples": 517,
+    "target": "log_area (Burned Area in log hectares: ln(area + 1))",
+    "metrics": {
+      "Ridge (L2 Regularized)": {
+        "r2": 0.0068,
+        "r2_score": 0.0068,
+        "rmse": 1.4775,
+        "mae": 1.1935
+      },
+      "Random Forest": {
+        "r2": -0.0052,
+        "r2_score": -0.0052,
+        "rmse": 1.4864,
+        "mae": 1.2092
+      },
+      "XGBoost": {
+        "r2": -0.017,
+        "r2_score": -0.017,
+        "rmse": 1.4951,
+        "mae": 1.2047
+      }
+    },
+    "train_metrics": {
+      "Ridge (L2 Regularized)": {
+        "r2": 0.0268,
+        "r2_score": 0.0268,
+        "rmse": 1.3561,
+        "mae": 1.1145
+      },
+      "Random Forest": {
+        "r2": 0.1365,
+        "r2_score": 0.1365,
+        "rmse": 1.2774,
+        "mae": 1.0574
+      },
+      "XGBoost": {
+        "r2": 0.1495,
+        "r2_score": 0.1495,
+        "rmse": 1.2677,
+        "mae": 1.0496
+      }
+    },
+    "best_model": "Ridge (L2 Regularized)"
+  }
+}
